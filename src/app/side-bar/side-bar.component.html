@@ -1,0 +1,83 @@
+<div class="container">
+  <button mat-button (click)="fileInput.click()" class="button mat-elevation-z8">
+    <span>Choose Image</span>
+    <input
+      #fileInput
+      type="file"
+      (change)="onFileLoad.emit($event)"
+      style="display:none;"
+      value="input"
+    />
+  </button>
+
+  <div *ngIf="image">
+    <p class="image__title">Preview</p>
+    <img
+      [src]="image | safe"
+      class="image__preview"
+    />
+  </div>
+  <p class="image__title">Animations</p>
+  <div class="image__select">
+    <label
+      for="animationsType"
+      class="image__label"
+    >
+      Animations Type
+      <select
+        [formControl]="animationType"
+        id="animationsType"
+        class="image__item"
+        (change)="setAnimationParametr.emit()"
+      >
+        <option value="">none</option>
+        <option value="slide">slide</option>
+        <option value="scale">scale</option>
+      </select>
+    </label>
+
+    <label
+      for="animations"
+      class="image__label"
+      *ngIf="animationType.value === 'slide'"
+    >
+      Animations Direction
+      <select
+        [formControl]="translate"
+        id="animations"
+        (change)="triggerAnimation.emit()"
+        class="image__item"
+      >
+        <option value="translateX(100%)">From right</option>
+        <option value="translateX(-100%)">From left</option>
+        <option value="translateY(100%)">From bottom</option>
+        <option value="translateY(-100%)">From top</option>
+      </select>
+    </label>
+
+    <label
+      for="scaleChenge"
+      class="image__label"
+      *ngIf="animationType.value === 'scale'"
+    >
+      Scale Size
+      <input
+        type="number"
+        [formControl]="scale"
+        (change)="triggerAnimation.emit()"
+        class="image__item"
+        step=0.1
+      >
+    </label>
+
+
+  </div>
+  <a
+    class="app__download"
+    onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+    href="#"
+    download="page.html"
+  >
+    Download HTML
+  </a>
+</div>

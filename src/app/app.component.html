@@ -1,72 +1,38 @@
-  <mat-toolbar>
-    Upload picture
-  </mat-toolbar>
+<mat-toolbar>
+  Upload picture
+</mat-toolbar>
 
-  <mat-sidenav-container>
+<mat-sidenav-container>
 
-    <mat-sidenav class="mat-elevation-z8" opened mode="side">
-      <button mat-button (click)="fileInput.click()" class="button mat-elevation-z8">
-        <span>Choose Image</span>
-        <input
-          #fileInput type="file"
-          (change)="onFileLoad($event)"
-          style="display:none;"
-          [formControl]="name"
-        />
-      </button>
+  <mat-sidenav class="mat-elevation-z8" opened mode="side">
+    <app-side-bar
+      (onFileLoad)="onFileLoad($event)"
+      [image]="image"
+      [scale]="scale"
+      [translate]="translate"
+      [animationType]="animationType"
+      (setAnimationParametr)="setAnimationParametr()"
+      (triggerAnimation)="triggerAnimation()"
+    ></app-side-bar>
+  </mat-sidenav>
 
-      <div class="image_box">
-        <p class="image__title">Preview</p>
-        <img
-          *ngIf="image"
-          [src]="image | safe"
-          class="image__preview"
-        />
-      </div>
-
-      <div class="image__select">
-        <p class="image__title">Animations</p>
-        <select
-          name="animations"
-          id="animations"
-          (change)="setStartPosition($event.target)"
-          class="image__item"
-        >
-          <option value="right">From right</option>
-          <option value="left">From left</option>
-          <option value="bottom">From bottom</option>
-          <option value="top">From top</option>
-        </select>
-
-        <select
-          name="animationsType"
-          id="animationsType"
-          (change)="setAnimationType($event.target)"
-          class="image__item"
-        >
-          <option value="none">none</option>
-          <option value="slide">slide</option>
-          <option value="scale">scale</option>
-        </select>
-      </div>
-
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <div class="content mat-elevation-z8">
-          <div class="animation mat-elevation-z8">
-            <img
-              *ngIf="image"
-              class="image"
-              [src]="image | safe" alt="no image"
-              [@imageAnimation]='{value: animationType, params: {
-                translate: translate,
-                animationType: animationType,
-                startPosition: startPosition
-              }}'
-            >
-          </div>
+  <mat-sidenav-content>
+      <div class="content mat-elevation-z8">
+        <div class="animation mat-elevation-z8">
+          <img
+            *ngIf="image"
+            class="image"
+            [src]="image | safe" 
+            alt="no image"
+            [@imageAnimation]='{
+              value: animationParametr,
+              params: {
+                translate: translate.value,
+                scaleSize: scale.value
+            }}'
+          >
         </div>
+      </div>
 
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

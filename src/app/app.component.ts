@@ -1,62 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Animations } from './animations';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   animations: [Animations],
 })
 
 export class AppComponent {
   title = 'my-app';
   image = '';
-  public translate: string = 'translateX';
-  public startPosition: string = '-100%';
-  public animationType: string = '';
-  name = new FormControl('');
+  public translate = new FormControl('translateX(100%)');
+  public animationType = new FormControl('');
+  scale = new FormControl(1.2);
+  animationParametr: string = '';
+
 
   constructor() { }
 
-  onFileLoad(event: any) {
-    this.image = window.URL.createObjectURL(event.target.files[0])
+  onFileLoad(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    this.image = window.URL.createObjectURL(file);
+    this.animationType.enable();
   }
 
-  setStartPosition(target: EventTarget | null) {
-    const value = (<HTMLInputElement>target).value;
-    switch (value) {
-      case 'top':
-        this.translate = 'translateY';
-        this.startPosition = '-100%';
-        break;
-      case 'bottom':
-        this.translate = 'translateY';
-        this.startPosition = '100%';
-        break;
-      case 'left':
-        this.translate = 'translateX';
-        this.startPosition = '-100%';
-        break;
-      case 'right':
-        this.translate = 'translateX';
-        this.startPosition = '100%';
-        break;
-    }
-
-    const animation = this.animationType;
-    this.animationType = '';
-    this.animationType = animation;
-    console.log(this.animationType);
-    // setTimeout(() => {
-    //   this.animationType = '';
-    // }, 1000)
+  setAnimationParametr() {
+    this.animationParametr = this.animationType.value || '';
   }
 
-  setAnimationType(target: EventTarget | null) {
-    this.animationType = (<HTMLInputElement>target).value;
-    // setTimeout(() => {
-    //   this.animationType = '';
-    // }, 1000)
+  triggerAnimation() {
+    this.animationParametr = '';
+    setTimeout(() => {
+      this.animationParametr = this.animationType.value || '';
+    }, 100)
+  }
+
+  ngOnInit () {
+    this.animationType.disable();
   }
 }

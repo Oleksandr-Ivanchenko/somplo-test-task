@@ -10,10 +10,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button'
 import { SafePipe } from './safe.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SafePipe],
+  declarations: [
+    AppComponent,
+    SafePipe,
+    SideBarComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
