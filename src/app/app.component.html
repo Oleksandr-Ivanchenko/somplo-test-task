@@ -1,38 +1,28 @@
-<mat-toolbar>
-  Upload picture
-</mat-toolbar>
+<div class="page">
+  <mat-toolbar class="page__tool-bar">
+    Upload picture
+  </mat-toolbar>
+  <mat-sidenav-container  class="page__container">
+    <mat-sidenav class="page__side-bar mat-elevation-z8" opened mode="side">
+      <app-side-bar
+        (onFileLoad)="onFileLoad($event)"
+        [image]="image"
+        [scale]="scale"
+        [translate]="translate"
+        [animationType]="animationType"
+        (setAnimationParametr)="setAnimationParametr()"
+        (triggerAnimation)="triggerAnimation()"
+      ></app-side-bar>
+    </mat-sidenav>
 
-<mat-sidenav-container>
+    <mat-sidenav-content>
+      <app-main
+        [image]="image"
+        [scale]="scale"
+        [translate]="translate"
+        [animationParametr]="animationParametr"
+      ></app-main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
 
-  <mat-sidenav class="mat-elevation-z8" opened mode="side">
-    <app-side-bar
-      (onFileLoad)="onFileLoad($event)"
-      [image]="image"
-      [scale]="scale"
-      [translate]="translate"
-      [animationType]="animationType"
-      (setAnimationParametr)="setAnimationParametr()"
-      (triggerAnimation)="triggerAnimation()"
-    ></app-side-bar>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
-        <div class="animation mat-elevation-z8">
-          <img
-            *ngIf="image"
-            class="image"
-            [src]="image | safe" 
-            alt="no image"
-            [@imageAnimation]='{
-              value: animationParametr,
-              params: {
-                translate: translate.value,
-                scaleSize: scale.value
-            }}'
-          >
-        </div>
-      </div>
-
-  </mat-sidenav-content>
-</mat-sidenav-container>

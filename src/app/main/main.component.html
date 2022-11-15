@@ -1,0 +1,16 @@
+<div class="main mat-elevation-z8">
+  <div class="main__animation mat-elevation-z8">
+    <img
+      *ngIf="image"
+      class="main__image"
+      [src]="image | safe"
+      alt="no image"
+      [@imageAnimation]='{
+        value: animationParametr,
+        params: {
+          translate: translate.value,
+          scaleSize: scale.value
+      }}'
+    >
+  </div>
+</div>

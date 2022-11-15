@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { SafePipe } from './safe.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     AppComponent,
     SafePipe,
     SideBarComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

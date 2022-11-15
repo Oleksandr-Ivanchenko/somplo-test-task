@@ -1,5 +1,9 @@
-<div class="container">
-  <button mat-button (click)="fileInput.click()" class="button mat-elevation-z8">
+<div class="side-bar">
+  <button
+    mat-button
+    (click)="fileInput.click()"
+    class="side-bar__button mat-elevation-z8"
+  >
     <span>Choose Image</span>
     <input
       #fileInput
@@ -7,27 +11,28 @@
       (change)="onFileLoad.emit($event)"
       style="display:none;"
       value="input"
+      class="side-bar__input"
     />
   </button>
 
   <div *ngIf="image">
-    <p class="image__title">Preview</p>
+    <p class="side-bar__title">Preview</p>
     <img
       [src]="image | safe"
-      class="image__preview"
+      class="side-bar__preview"
     />
   </div>
-  <p class="image__title">Animations</p>
-  <div class="image__select">
+  <p class="side-bar__title">Animations</p>
+  <div class="side-bar__select">
     <label
       for="animationsType"
-      class="image__label"
+      class="side-bar__label"
     >
       Animations Type
       <select
         [formControl]="animationType"
         id="animationsType"
-        class="image__item"
+        class="side-bar__item"
         (change)="setAnimationParametr.emit()"
       >
         <option value="">none</option>
@@ -38,7 +43,7 @@
 
     <label
       for="animations"
-      class="image__label"
+      class="side-bar__label"
       *ngIf="animationType.value === 'slide'"
     >
       Animations Direction
@@ -46,7 +51,7 @@
         [formControl]="translate"
         id="animations"
         (change)="triggerAnimation.emit()"
-        class="image__item"
+        class="side-bar__item"
       >
         <option value="translateX(100%)">From right</option>
         <option value="translateX(-100%)">From left</option>
@@ -57,7 +62,7 @@
 
     <label
       for="scaleChenge"
-      class="image__label"
+      class="side-bar__label"
       *ngIf="animationType.value === 'scale'"
     >
       Scale Size
@@ -65,7 +70,7 @@
         type="number"
         [formControl]="scale"
         (change)="triggerAnimation.emit()"
-        class="image__item"
+        class="side-bar__input side-bar__item"
         step=0.1
       >
     </label>
@@ -73,7 +78,7 @@
 
   </div>
   <a
-    class="app__download"
+    class="side-bar__download"
     onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
     href="#"
     download="page.html"

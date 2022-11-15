@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Animations } from './animations';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [Animations],
 })
 
 export class AppComponent {
